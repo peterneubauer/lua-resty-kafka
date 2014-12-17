@@ -8,6 +8,7 @@ local buffer = require "resty.kafka.buffer"
 local client = require "resty.kafka.client"
 local Errors = require "resty.kafka.errors"
 
+
 local setmetatable = setmetatable
 local timer_at = ngx.timer.at
 local is_exiting = ngx.worker.exiting
@@ -128,7 +129,7 @@ local function choose_broker(self, topic, partition_id)
     end
 
     local config = brokers[leader]
-    local bk = broker:new("54.171.240.125", config.port, self.socket_config)
+    local bk = broker:new(config.host, config.port, self.socket_config)
     self.producer_brokers[leader] = bk
 
     return bk
