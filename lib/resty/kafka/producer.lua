@@ -333,7 +333,7 @@ end
 function _M.send(self, topic, key, message)
     ngx_log(ERR, "sending 1", topic, key, message)
     local partition_id, err = choose_partition(self, topic, key)
-    ngx_log(ERR, "partition_id")
+    ngx_log(ERR, "partition_id 2")
     if not partition_id then
         return nil, err
     end
