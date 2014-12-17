@@ -152,8 +152,11 @@ local function _send(self, topic, partition_id, queue, index)
             if resp then
                 local r = produce_decode(resp)[topic][partition_id]
                 if r.errcode == 0 then
+                    ngx_log(ERR, "offset" .. r.offset)
                     return r.offset
+
                 else
+                    ngx_log(ERR, "error"..r.errorcode)
                     err = Errors[r.errcode]
                 end
             end
