@@ -146,6 +146,7 @@ local function _send(self, topic, partition_id, queue, index)
 
     while retry <= self.max_retry do
         bk, err = choose_broker(self, topic, partition_id)
+        ngx_log(ERR, "broker: "..bk.host .. ", "..bk.port)
         if bk then
             resp, err = bk:send_receive(req)
             ngx_log(ERR, "resp "..topic)
