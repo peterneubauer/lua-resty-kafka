@@ -48,19 +48,19 @@ function _M.send_receive(self, request)
         return nil, err
     end
     ngx.log(ngx.ERR, 'trying to resolve ' .. self.host)
-    local answers, err = r:tcp_query(self.host)
-    if not answers then
-        ngx.say("failed to query the DNS server: ", err)
-        return
-    end
+--    local answers, err = r:tcp_query(self.host)
+--    if not answers then
+--        ngx.say("failed to query the DNS server: ", err)
+--        return
+--    end
 --    ngx.log(ngx.ERR, answers)
-    for i, ans in ipairs(answers) do
-        ngx.say(ans.name, " ", ans.address or ans.cname,
-            " type:", ans.type, " class:", ans.class,
-            " ttl:", ans.ttl)
-    end
-    ngx.log(ngx.ERR, 'talking to host ' .. answers[0].address)
-    local ok, err = sock:connect(answers[0].address, self.port)
+--    for i, ans in ipairs(answers) do
+--        ngx.say(ans.name, " ", ans.address or ans.cname,
+--            " type:", ans.type, " class:", ans.class,
+--            " ttl:", ans.ttl)
+--    end
+--    ngx.log(ngx.ERR, 'talking to host ' .. answers[0].address)
+    local ok, err = sock:connect(self.host, self.port)
     if not ok then
         return nil, err
     end
