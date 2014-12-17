@@ -129,7 +129,7 @@ local function choose_broker(self, topic, partition_id)
     end
 
     local config = brokers[leader]
-    local bk = broker:new(config.host, config.port, self.socket_config)
+    local bk = broker:new("54.171.240.125", config.port, self.socket_config)
     self.producer_brokers[leader] = bk
 
     return bk
