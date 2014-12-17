@@ -58,6 +58,7 @@ function _M.send_receive(self, request)
             " type:", ans.type, " class:", ans.class,
             " ttl:", ans.ttl)
     end
+    ngx.log(ngx.ERR, 'talking to host ' .. answers[0].address)
     local ok, err = sock:connect(answers[0].address, self.port)
     if not ok then
         return nil, err
