@@ -71,6 +71,7 @@ local function produce_encode(self, topic, partition_id, queue, index)
     -- MessageSetSize and MessageSet
     req:message_set(queue, index)
 
+    ngx_log(ERR, "produce_encode 2")
     return req
 end
 
@@ -147,6 +148,7 @@ local function _send(self, topic, partition_id, queue, index)
         bk, err = choose_broker(self, topic, partition_id)
         if bk then
             resp, err = bk:send_receive(req)
+            ngx_log(ERR, "resp")
             if resp then
                 local r = produce_decode(resp)[topic][partition_id]
                 if r.errcode == 0 then
