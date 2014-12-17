@@ -11,7 +11,8 @@ local timer_at = ngx.timer.at
 local ngx_log = ngx.log
 local DEBUG = ngx.DEBUG
 local ERR = ngx.ERR
-local debug = ngx.config.debug
+--local debug = ngx.config.debug
+local debug = true
 local is_exiting = ngx.worker.exiting
 local ngx_sleep = ngx.sleep
 
