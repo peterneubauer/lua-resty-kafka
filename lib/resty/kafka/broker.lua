@@ -47,6 +47,7 @@ function _M.send_receive(self, request)
     if not sock then
         return nil, err
     end
+    ngx.log(ngx.ERR, 'trying to resolve ' .. self.host)
     local answers, err = r:query(self.host)
     if not answers then
         ngx.say("failed to query the DNS server: ", err)
