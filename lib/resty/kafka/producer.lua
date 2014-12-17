@@ -8,7 +8,6 @@ local buffer = require "resty.kafka.buffer"
 local client = require "resty.kafka.client"
 local Errors = require "resty.kafka.errors"
 
-
 local setmetatable = setmetatable
 local timer_at = ngx.timer.at
 local is_exiting = ngx.worker.exiting

@@ -3,6 +3,16 @@
 
 
 local response = require "resty.kafka.response"
+local resolver = require "resty.dns.resolver"
+local r, err = resolver:new{
+    nameservers = {"8.8.8.8", {"8.8.4.4", 53} },
+    retrans = 5,  -- 5 retransmissions on receive timeout
+    timeout = 2000,  -- 2 sec
+}
+if not r then
+    ngx.say("failed to instantiate the resolver: ", err)
+    return
+end
 
 
 local to_int32 = response.to_int32
@@ -37,8 +47,18 @@ function _M.send_receive(self, request)
     if not sock then
         return nil, err
     end
-
-    local ok, err = sock:connect(self.host, self.port)
+    local answers, err = r:query(self.host)
+    if not answers then
+        ngx.say("failed to query the DNS server: ", err)
+        return
+    end
+--    ngx.log(ngx.ERR, answers)
+    for i, ans in ipairs(answers) do
+        ngx.say(ans.name, " ", ans.address or ans.cname,
+            " type:", ans.type, " class:", ans.class,
+            " ttl:", ans.ttl)
+    end
+    local ok, err = sock:connect(answers[0].address, self.port)
     if not ok then
         return nil, err
     end
