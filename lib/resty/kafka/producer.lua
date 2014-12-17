@@ -161,7 +161,7 @@ local function _send(self, topic, partition_id, queue, index)
                     err = Errors[r.errcode]
                 end
             end
-            ngx_log(ERR, "resp3 "..topic)
+            ngx_log(ERR, "resp error: " .. err)
         end
 
         if debug then
