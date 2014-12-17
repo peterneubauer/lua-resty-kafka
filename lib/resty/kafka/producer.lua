@@ -324,6 +324,7 @@ function _M.new(self, broker_list, producer_config)
         cluster_inited = p
         _timer_flush(nil, p, buffer_opts.flush_time / 1000)
     end
+    ngx_log(DEBUG, "new after client")
     return p
 end
 
@@ -339,6 +340,7 @@ function _M.send(self, topic, key, message)
     end
 
     local queue = { key or "", message }
+    ngx_log(ERR, "sending", topic, partition_id, queue)
     return _send(self, topic, partition_id, queue, 2)
 end
 
