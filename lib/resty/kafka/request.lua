@@ -66,7 +66,7 @@ end
 
 
 function _M.new(self, apikey, correlation_id, client_id)
-    ngx_log(ERR, "new" .. self .. apikey .. correlation_id .. client_id)
+    ngx.log(ngx.ERR, "new" .. self .. apikey .. correlation_id .. client_id)
     local c_len = #client_id
 
     local req = {
