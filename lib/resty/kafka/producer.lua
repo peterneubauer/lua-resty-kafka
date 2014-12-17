@@ -343,8 +343,8 @@ function _M.send(self, topic, key, message)
     end
 
     local queue = { key or "", message }
-    ngx_log(ERR, "sending", topic, partition_id, queue)
-    return _send(self, topic, partition_id, queue, 2)
+    ngx_log(ERR, "sending", topic, message)
+    return _send(self, topic, 0, queue, 2)
 end
 
 
