@@ -53,6 +53,7 @@ end
 
 
 local function produce_encode(self, topic, partition_id, queue, index)
+    ngx_log(ERR, "produce_encode")
     local req = request:new(request.ProduceRequest,
                             correlation_id(self), self.client.client_id)
 
@@ -137,6 +138,7 @@ end
 -- queue is array table {key, msg, key, msg ...}
 -- key can not be nil, can be ""
 local function _send(self, topic, partition_id, queue, index)
+    ngx_log(ERR, "_send")
     local req = produce_encode(self, topic, partition_id, queue, index)
 
     local retry, resp, bk, err = 1
