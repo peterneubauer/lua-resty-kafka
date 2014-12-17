@@ -26,8 +26,8 @@ Synopsis
 
 ```lua
     lua_package_path "/path/to/lua-resty-kafka/lib/?.lua;;";
-    resolver 8.8.8.8;
     server {
+        resolver 8.8.8.8;
         location /test {
             content_by_lua '
                 local cjson = require "cjson"
