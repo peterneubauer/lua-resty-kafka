@@ -148,8 +148,9 @@ local function _send(self, topic, partition_id, queue, index)
         bk, err = choose_broker(self, topic, partition_id)
         if bk then
             resp, err = bk:send_receive(req)
-            ngx_log(ERR, "resp")
+            ngx_log(ERR, "resp "..topic)
             if resp then
+                ngx_log(ERR, "resp2 "..topic)
                 local r = produce_decode(resp)[topic][partition_id]
                 if r.errcode == 0 then
                     ngx_log(ERR, "offset" .. r.offset)
@@ -160,6 +161,7 @@ local function _send(self, topic, partition_id, queue, index)
                     err = Errors[r.errcode]
                 end
             end
+            ngx_log(ERR, "resp3 "..topic)
         end
 
         if debug then
