@@ -330,6 +330,7 @@ end
 
 
 function _M.send(self, topic, key, message)
+    ngx_log(ERR, "sending 1", topic, key, message)
     local partition_id, err = choose_partition(self, topic, key)
     if not partition_id then
         return nil, err
