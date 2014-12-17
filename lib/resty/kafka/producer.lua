@@ -286,7 +286,7 @@ end
 
 
 function _M.new(self, broker_list, producer_config)
-    ngx_log(ERR, "new 1")
+    ngx_log(ERR, "new 1" .. )
     local opts = producer_config or {}
     local async = opts.producer_type == "async"
     if async and cluster_inited then

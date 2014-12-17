@@ -153,7 +153,6 @@ end
 
 
 function _M.message_set(self, messages, index)
-    ngx
     local req = self._req
     local off = self.offset
     local msg_set_size = 0
